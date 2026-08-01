@@ -1,0 +1,38 @@
+# Build output
+out/
+dist/
+*.vsix
+.vscode-test/
+
+# Node modules
+node_modules/
+package-lock.json
+yarn.lock
+
+# Python virtual environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+.env.local
+
+# IDE
+.idea/
+.vscode/*.local
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Temporary
+tmp/
+temp/
+*.tmp
