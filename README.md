@@ -1,5 +1,19 @@
 # Flaxon Spring-Boot
 
+
+ <p align="center">
+  <img src="https://raw.githubusercontent.com/aldanedev-create/Flaxon-Backend-Framework/main/assets/flaxon.png" alt="flaxon Logo"
+   width="200"/>
+</p>
+
+
+  
+  <p align="center">
+  <a href="https://pypi.org/project/flaxon/"><img src="https://img.shields.io/pypi/v/flaxon.svg" alt="PyPI version"></a>
+  <a href="https://github.com/aldanedev-create/Flaxon-Backend-Framework/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/badge/code%20style-ruff-000000.svg" alt="Code style: ruff"></a>
+</p>
+
 **Spring Boot-style patterns for Flaxon** — Dependency Injection, AOP, REST Controllers, and more.
 
 ## What is this?

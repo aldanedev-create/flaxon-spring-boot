@@ -21,7 +21,6 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-    "Framework :: Flaxon",
 ]
 dependencies = [
     "flaxon>=0.1.9",
