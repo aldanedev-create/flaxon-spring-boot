@@ -2,8 +2,8 @@
 
 from typing import Any, Dict, List, Optional, Type, Callable
 import inspect
+import re
 from functools import wraps
-
 
 # ---- Request Mapping Annotations ----
 
@@ -162,20 +162,28 @@ class RestControllerRegistrar:
             http_method = (mapping.method or "GET").lower()
             
             # Register route
-            route_func = self._create_route_handler(controller, method)
+            route_func = self._create_route_handler(controller, method, path)
+            # Flaxon's router uses <name> path parameters, not the Spring-style
+            # {name} syntax used throughout this plugin's own path templates.
+            flaxon_path = self._to_flaxon_path(path)
             
             if http_method == "get":
-                self.app.get(path)(route_func)
+                self.app.get(flaxon_path)(route_func)
             elif http_method == "post":
-                self.app.post(path)(route_func)
+                self.app.post(flaxon_path)(route_func)
             elif http_method == "put":
-                self.app.put(path)(route_func)
+                self.app.put(flaxon_path)(route_func)
             elif http_method == "delete":
-                self.app.delete(path)(route_func)
+                self.app.delete(flaxon_path)(route_func)
             elif http_method == "patch":
-                self.app.patch(path)(route_func)
+                self.app.patch(flaxon_path)(route_func)
+
+    @staticmethod
+    def _to_flaxon_path(path: str) -> str:
+        """Convert a Spring-style {name} path template to Flaxon's <name> syntax."""
+        return re.sub(r"\{(\w+)\}", r"<\1>", path)
     
-    def _create_route_handler(self, controller: Any, method: Callable) -> Callable:
+    def _create_route_handler(self, controller: Any, method: Callable, path: str) -> Callable:
         """Create a route handler from a controller method."""
         from flaxon.http import Request
         
@@ -232,6 +240,15 @@ class RestControllerRegistrar:
             # Call the method
             result = method(controller, *args)
             return await result if inspect.isawaitable(result) else result
+        
+        # Flaxon resolves endpoint parameters via inspect.signature(), so a
+        # bare **kwargs is invisible to it -- give the handler an explicit
+        # signature listing "request" plus every path variable.
+        path_var_names = re.findall(r"\{(\w+)\}", path)
+        sig_params = [inspect.Parameter("request", inspect.Parameter.POSITIONAL_OR_KEYWORD, annotation=Request)]
+        for name in path_var_names:
+            sig_params.append(inspect.Parameter(name, inspect.Parameter.POSITIONAL_OR_KEYWORD, annotation=str))
+        handler.__signature__ = inspect.Signature(sig_params)
         
         return handler
 

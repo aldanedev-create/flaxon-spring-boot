@@ -5,7 +5,7 @@ from typing import Optional, Dict, Any, List, Type, Callable
 from dataclasses import dataclass, field
 
 from flaxon import Flaxon
-from flaxon.plugin import Plugin
+from flaxon.plugins import Plugin
 
 from .container import ApplicationContext
 from .annotations import ComponentScan

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "flaxon-spring-boot"
-version = "0.1.0"
+version = "0.1.1"
 description = "Spring Boot-style patterns for Flaxon - Dependency Injection, AOP, REST Controllers, and more"
 readme = "README.md"
 authors = [
@@ -13,7 +13,7 @@ authors = [
 license = {text = "MIT"}
 requires-python = ">=3.11"
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
@@ -44,7 +44,6 @@ standard = [
 Homepage = "https://github.com/aldanedev-create/flaxon-spring-boot"
 Repository = "https://github.com/aldanedev-create/flaxon-spring-boot"
 Issues = "https://github.com/aldanedev-create/flaxon-spring-boot/issues"
-Documentation = "https://flaxon.io/docs/plugins/spring-boot"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
